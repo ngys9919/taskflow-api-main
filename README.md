@@ -14,7 +14,7 @@ Fill in each section below, then commit and push this `README.md` to your GitHub
 Your TaskFlow API deployed on Railway:
 
 ```
-https://your-app-name.up.railway.app/api/tasks
+https://taskflow-api-main-production.up.railway.app/api/tasks
 ```
 
 ### Screenshot: Railway dashboard
@@ -34,10 +34,7 @@ Your live Railway URL returning task data (in your browser or terminal).
 If you didn't complete every task, list what you completed, what went wrong, and the error messages you saw. If everything worked, write "None".
 
 ```
-Completed: Task 1, Task 2
-
-Error at Task 3:
-<paste the error message here>
+"None"
 ```
 
 ### Stretch goal (optional)
