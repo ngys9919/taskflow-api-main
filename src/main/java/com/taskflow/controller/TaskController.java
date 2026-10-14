@@ -2,7 +2,8 @@ package com.taskflow.controller;
 
 import com.taskflow.entity.Task;
 import com.taskflow.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,14 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+    // @Autowired 
+    // private TaskService taskService;
+
+    private final TaskService taskService;
+
+    TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {

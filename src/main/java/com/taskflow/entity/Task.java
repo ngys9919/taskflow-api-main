@@ -4,12 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 @Entity
 @Table(name = "tasks")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+// @AllArgsConstructor
+@JsonPropertyOrder({ "id", "title", "description", "priority", "dueDate", "completed" })
 public class Task {
 
     @Id
@@ -27,4 +30,12 @@ public class Task {
 
     @Column(nullable = false)
     private Boolean completed = false;
+
+    public Task(String title, String description, String priority, LocalDate dueDate, Boolean completed) {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.dueDate = dueDate;
+        this.completed = completed;
+    }
 }
