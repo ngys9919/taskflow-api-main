@@ -106,6 +106,29 @@ Get a task by ID:
 curl http://localhost:8080/api/tasks/1
 ```
 
+### Frontend CORS
+
+The API allows cross-origin requests from `https://task-manager-production.netlify.app`
+using GET, HEAD, POST, PUT, and DELETE. Spring handles OPTIONS preflight requests
+automatically.
+
+After changing the CORS configuration, redeploy the backend on Railway. Check the
+deployed PUT preflight without modifying any task:
+
+```bash
+curl -i -X OPTIONS \
+  https://taskflow-api-main-production.up.railway.app/api/tasks/1 \
+  -H "Origin: https://task-manager-production.netlify.app" \
+  -H "Access-Control-Request-Method: PUT" \
+  -H "Access-Control-Request-Headers: content-type"
+```
+
+Expect HTTP 200, `Access-Control-Allow-Origin` matching the frontend origin, and
+`Access-Control-Allow-Methods` including PUT. If the browser still reports missing
+CORS headers, inspect its failed OPTIONS request's status, URL, requested headers,
+and response. An upstream error or redirect may not include the application's
+CORS headers; changing the application allowlist will not fix such a response.
+
 ### H2 Database Console
 
 While the app is running, the H2 console is available at `http://localhost:8080/h2-console`.
