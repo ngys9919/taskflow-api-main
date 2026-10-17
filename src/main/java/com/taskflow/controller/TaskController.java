@@ -22,21 +22,21 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @CrossOrigin(origins = "https://task-manager-production.netlify.app")
+    // @CrossOrigin(origins = "https://task-manager-production.netlify.app")
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
         List<Task> tasks = taskService.findAllTasks();
         return ResponseEntity.ok(tasks);
     }
 
-    @CrossOrigin(origins = "https://task-manager-production.netlify.app")
+    // @CrossOrigin(origins = "https://task-manager-production.netlify.app")
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
         Task task = taskService.findTaskById(id);
         return ResponseEntity.ok(task);
     }
 
-    @CrossOrigin(origins = "https://task-manager-production.netlify.app")
+    // @CrossOrigin(origins = "https://task-manager-production.netlify.app")
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         Task createdTask = taskService.createTask(task);
