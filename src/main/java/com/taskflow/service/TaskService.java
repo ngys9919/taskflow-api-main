@@ -33,6 +33,7 @@ public class TaskService {
 
     public Task updateTask(Long id, Task task) {
         Task existingTask = findTaskById(id);
+        existingTask.setId(id);
         existingTask.setTitle(task.getTitle());
         existingTask.setDescription(task.getDescription());
         existingTask.setPriority(task.getPriority());
