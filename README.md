@@ -41,11 +41,28 @@ If you didn't complete every task, list what you completed, what went wrong, and
 
 Which stretch goal you chose (if any), what you built, and any links (for example, your frontend URL, CI pipeline run or Docker Hub tags).
 
-```
-Stretch goal: <option number and name, or "None">
-Links: <https://...>
-Notes: <what you built and anything that didn't work>
-```
+
+Stretch goal: <OPTION 2: ADD A FRONTEND ON NETLIFY>
+
+Link for Frontend URL: **https://task-manager-production.netlify.app/**
+
+**Notes:**
+
+1. Modify the taskflow-api-main template code to include the following additional API Routes in TaskController.java:
+
+The API is available under the base path `/api/tasks`.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| PUT | `/api/tasks/{id}` | Update a task |
+| DELETE | `/api/tasks/{id}` | Delete a task |
+
+2. Add the implementation functionality for updateTask and deleteTask in TaskService.java, still using the JpaRepository interface and H2 in-memory database.
+
+3. Using the CORS configuration in TaskflowApiApplication.java to configure allowedOrigins(...), and also allowedMethods(...). Spring MVC’s default CORS methods are GET, HEAD, and POST, so cross-origin PUT and DELETE requests are added.
+
+
+![Frontend using Netlify](screenshots/frontend.png)
 
 ## Getting started
 
@@ -105,29 +122,6 @@ Get a task by ID:
 ```bash
 curl http://localhost:8080/api/tasks/1
 ```
-
-### Frontend CORS
-
-The API allows cross-origin requests from `https://task-manager-production.netlify.app`
-using GET, HEAD, POST, PUT, and DELETE. Spring handles OPTIONS preflight requests
-automatically.
-
-After changing the CORS configuration, redeploy the backend on Railway. Check the
-deployed PUT preflight without modifying any task:
-
-```bash
-curl -i -X OPTIONS \
-  https://taskflow-api-main-production.up.railway.app/api/tasks/1 \
-  -H "Origin: https://task-manager-production.netlify.app" \
-  -H "Access-Control-Request-Method: PUT" \
-  -H "Access-Control-Request-Headers: content-type"
-```
-
-Expect HTTP 200, `Access-Control-Allow-Origin` matching the frontend origin, and
-`Access-Control-Allow-Methods` including PUT. If the browser still reports missing
-CORS headers, inspect its failed OPTIONS request's status, URL, requested headers,
-and response. An upstream error or redirect may not include the application's
-CORS headers; changing the application allowlist will not fix such a response.
 
 ### H2 Database Console
 
